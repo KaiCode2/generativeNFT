@@ -36,6 +36,11 @@ const config: HardhatUserConfig = {
         blockNumber: 7378872
       }
     },
+    ganache: {
+      url: 'http://127.0.0.1:7545',
+      accounts: testnetAccounts,
+      loggingEnabled: true
+    },
     rinkeby: {
       url: `https://rinkeby.infura.io/v3/${INFURA_PROJECT_ID}`,
       accounts: testnetAccounts,
