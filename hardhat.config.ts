@@ -2,6 +2,7 @@ import { HardhatUserConfig, task } from "hardhat/config";
 import "tsconfig-paths/register";
 import "@nomicfoundation/hardhat-toolbox";
 import "hardhat-deploy";
+import "@nomiclabs/hardhat-etherscan";
 import "hardhat-circom";
 import "@nomiclabs/hardhat-etherscan";
 import "hardhat-storage-layout";
