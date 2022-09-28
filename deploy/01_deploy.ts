@@ -7,6 +7,8 @@ const deploy: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   const tx = await Blobs.deploy("Blobs", "BLB");
   console.log(tx);
 
+  await tx.deployTransaction.wait();
+
   await hre.run("verify:verify", {
     address: tx.address,
     constructorArguments: ["Blobs", "BLB"],
