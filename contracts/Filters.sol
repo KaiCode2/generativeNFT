@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: UNLICENSED
 // Author: Kai Aldag <kaialdag@icloud.com>
 // Date: September 28, 2022
-// Purpose: Make cool blobs of colour n shit
+// Purpose: Make cool filters of pictures n shit
 
 pragma solidity ^0.8.12;
 
@@ -48,12 +48,12 @@ contract Filters is ERC721Enumerable {
                                 name,
                                 '", "description":"',
                                 description,
-                                '", "image": "',
-                                "data:image/svg+xml;base64,",
-                                image,
-                                // '", "animation_url": "',
-                                // "data:text/html;base64,",
+                                // '", "image": "',
+                                // "data:image/svg+xml;base64,",
                                 // image,
+                                '", "animation_url": "',
+                                "data:text/html;base64,",
+                                image,
                                 '", "background_color": "',
                                 "003d3d"
                                 '", "attributes": [',
