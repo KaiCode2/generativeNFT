@@ -3,16 +3,21 @@ import { DeployFunction } from "hardhat-deploy/types";
 
 const deploy: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   const { ethers } = hre;
-  const Blobs = await ethers.getContractFactory("Blobs");
-  const tx = await Blobs.deploy("Blobs", "BLB");
+  const Blobs = await ethers.getContractFactory("Three");
+  const tx = await Blobs.deploy("Three", "3");
   console.log(tx);
 
   await tx.deployTransaction.wait();
 
-  await hre.run("verify:verify", {
-    address: tx.address,
-    constructorArguments: ["Blobs", "BLB"],
-  });
+  if (hre.network.name == "goerli" || hre.network.name == "mainnet") {
+    await hre.run("verify:verify", {
+        address: tx.address,
+        constructorArguments: ["Three", "3"],
+      });
+  } else if (hre.network.name == "ganache") {
+    await tx.mint(0);
+    console.log(await tx.tokenURI(0));
+  }
 };
 
 export default deploy;
