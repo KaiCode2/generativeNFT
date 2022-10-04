@@ -10,10 +10,10 @@ const deploy: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   await tx.deployTransaction.wait();
 
   if (hre.network.name == "goerli" || hre.network.name == "mainnet") {
-    // await hre.run("verify:verify", {
-    //     address: tx.address,
-    //     constructorArguments: ["Diamonds", "DMD"],
-    //   });
+    await hre.run("verify:verify", {
+        address: tx.address,
+        constructorArguments: ["Diamonds", "DMD"],
+      });
   } else {
     await tx.mint(0);
     console.log(await tx.tokenURI(0));
