@@ -1,0 +1,190 @@
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.5.0/lib/p5.js"></script>
+    <script>
+      let yOffset = 0.0;
+
+      const sketch = (p5) => {
+        const smallerSize =
+          window.innerWidth > window.innerHeight
+            ? window.innerHeight
+            : window.innerWidth;
+        const constraints = [smallerSize * 0.1, smallerSize * 0.9];
+        p5.setup = () => {
+          p5.createCanvas(smallerSize, smallerSize);
+          p5.background("rgb(230,214,233)");
+
+          p5.noFill();
+        };
+        p5.draw = () => {
+          p5.background("rgba(230,214,233, 0.05)");
+          p5.stroke("#075862");
+          p5.strokeWeight(1);
+          p5.beginShape();
+
+          let xOffset = 0.0;
+          let step = 10;
+          for (
+            let x = constraints[0];
+            x < constraints[1] + step / 2;
+            x += step
+          ) {
+            let y = p5.map(
+              p5.noise(xOffset, yOffset),
+              0,
+              1,
+              constraints[0],
+              constraints[1]
+            );
+            p5.vertex(x, y);
+            xOffset += 0.04;
+          }
+          yOffset += 0.01;
+          p5.endShape();
+          p5.stroke(255);
+          p5.strokeWeight(10);
+          p5.rect(
+            constraints[0],
+            constraints[0],
+            smallerSize * 0.8,
+            smallerSize * 0.8
+          );
+        };
+      };
+      new p5(sketch);
+
+      const canvas = document.querySelector("canvas");
+      window.addEventListener("resize", () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      });
+
+      // Noisy dots
+
+      //   var CIRCLE_W = 20;
+      //   var ACTUAL_W = CIRCLE_W * 0.72;
+      //   var MIN_W = 0;
+      //   var CIRCLE_DIST = CIRCLE_W / 2;
+
+      //   var COLS = innerWidth / CIRCLE_DIST + 1;
+      //   var ROWS = innerHeight / CIRCLE_DIST + 1;
+      //   var GREATER = Math.max(innerWidth, innerHeight);
+
+      //   var dots = [];
+      //   var beacon;
+
+      //   function setup() {
+      //     createCanvas(innerWidth, innerHeight);
+      //     noStroke();
+
+      //     for (var ci = 0; ci < COLS; ++ci)
+      //       for (var ri = 0; ri < ROWS; ++ri) {
+      //         var dot = new Dot(ci * CIRCLE_DIST, ri * CIRCLE_DIST);
+
+      //         dots.push(dot);
+      //       }
+      //   }
+
+      //   function draw() {
+      //     background("#263238");
+      //     beacon = new p5.Vector(mouseX, mouseY);
+
+      //     fill("#F44336");
+      //     dots.forEach(function (dot) {
+      //       dot.render();
+      //     });
+      //   }
+
+      //   var Dot = function (posX, posY) {
+      //     this.position = new p5.Vector(posX, posY);
+      //   };
+
+      //   Dot.prototype = {
+      //     render: function () {
+      //       var w = this.calcWidth();
+      //       ellipse(this.position.x, this.position.y, w, w);
+      //     },
+
+      //     calcWidth: function () {
+      //       var delta = Math.max(p5.Vector.dist(beacon, this.position), 0);
+
+      //       delta *= map(
+      //         noise(this.position.x, this.position.y, frameCount),
+      //         0,
+      //         1,
+      //         0.7,
+      //         1.2
+      //       );
+
+      //       if (delta > GREATER / 2) {
+      //         delta = GREATER / 2;
+      //       }
+
+      //       return map(delta, 0, GREATER / 2, ACTUAL_W, MIN_W);
+      //     },
+      //   };
+
+      // Spiral
+
+      //   function setup() {
+      //     createCanvas(windowWidth, windowHeight, WEBGL);
+      //     describe("a red 3d spiral shape created with beginShape and endShape");
+      //   }
+
+      //   function draw() {
+      //     background(220);
+
+      //     // click+drag on canvas to look around the shape
+      //     orbitControl();
+
+      //     fill(255, 0, 0, 128);
+
+      //     var numVertices = 100;
+      //     translate(0, numVertices, 0);
+      //     rotateY(millis() / 1000);
+      //     scale(20);
+      //     beginShape();
+      //     // a simple spiral shape
+      //     for (let i = 0; i < numVertices; i++) {
+      //       vertex(
+      //         sin((i / numVertices) * TWO_PI * 5) *
+      //           sin((i / numVertices) * PI) *
+      //           2,
+      //         -i / 10,
+      //         cos((i / numVertices) * TWO_PI * 5) *
+      //           sin((i / numVertices) * PI) *
+      //           2
+      //       );
+      //     }
+      //     endShape();
+      //   }
+
+      // Simple mouse follower
+
+      //   function setup() {
+      //     createCanvas(1500, 1000);
+      //   }
+
+      //   function draw() {
+      //     if (mouseIsPressed) {
+      //       fill(0);
+      //     } else {
+      //       fill(255);
+      //     }
+      //     ellipse(mouseX, mouseY, 80, 80);
+      //   }
+    </script>
+    <style>
+      html,
+      body,
+      canvas {
+        margin: 0px;
+        padding: 0px;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <main></main>
+  </body>
+</html>
